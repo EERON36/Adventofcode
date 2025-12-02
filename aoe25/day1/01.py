@@ -1,45 +1,3 @@
-def rdial(turndial, code):
-    total = turndial + code
-    print(f"Righ dial current position {total}")
-    global counter
-    if total == 0:
-        counter = counter + 1
-        print("CAUGHT YOU BITCH")
-    while total > 99:
-        if code == 0:
-            break
-        else:
-            if turndial is not 0:
-                counter = counter + 1
-            total = total - 100
-        # print("global +1")
-        # print(counter)
-    print(f"Final counter Right {counter}")
-    print(f"Final Position R {total}")
-    return total
-
-
-def ldial(turndial, code):
-    total = turndial - code
-    print(f"Left dial current position {total}")
-    global counter
-    if total == 0:
-        counter = counter + 1
-        print("CAUGHT YOU BITCH")
-    while total <= -1:
-        if code == 0:
-            break
-        else:
-            if turndial is not 0:
-                counter = counter + 1
-            total = total + 100
-        # print("global +1")
-        # print(counter)
-    print(f"Final counter Left {counter}")
-    print(f"Final Position L {total}")
-    return total
-
-
 def main():
     position = 50
     global counter
@@ -48,20 +6,18 @@ def main():
     with open("dial.txt", "r") as code:
         for line in code:
             line = line.strip()
-            print(line)
-            # print(position)
-            if line[0] == "R":
-                position = rdial(position, int(line[1:]))
 
-            else:
-                position = ldial(position, int(line[1:]))
+        if int(line[1:] >= 100):
+            # 100 = 1 varv
+            # räkna hur nånga
+            # mod 100 för rest värdet
 
-            # if position == 0:
-            #     counter += 1
-            # print(f"Added +1 in last if counter {counter} and position was {position}")
-
-        print(f"Final position {position}")
-        print(f"Final counter {counter}")
+            # left turn
+            # samam sak som right,
+            """Pos 25 -> L50
+            25 -> 75
+            100-25 = 50 -> R50
+            25+50 = 75"""
 
 
 # Run the program
